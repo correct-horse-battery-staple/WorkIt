@@ -42,8 +42,8 @@ public class ActivityActivityArrayAdapter extends ArrayAdapter<ActivityItem> {
         final double diffi = getItem(position).getDiff();
         final int count = getItem(position).getSize();
         name.setText(text);
-        diff.setText(""+diffi);
-        coun.setText(count);
+        diff.setText(String.valueOf(diffi));
+        coun.setText(String.valueOf(count));
         rowView.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
                 ((ActivityActivity)context).onClick(view,getItem(pos));

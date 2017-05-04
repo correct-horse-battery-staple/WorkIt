@@ -44,12 +44,15 @@ public class ActivityActivity extends ServerActivity {
         if(!handles.containsKey(name)){
             items.add(new ActivityItem(name,5));
             handles.put(name,items.size()-1);
+            ActivityActivityArrayAdapter adapter = new ActivityActivityArrayAdapter(this, items);
+            listview.setAdapter(adapter);
         }
     }
 
     public void onClick(View v, ActivityItem item){
         if(!editMode) {
             putData("activities", "'name':'"+item.getName()+"','difficulty':'" +item.getDiff()+ "'");
+            getData("activities");
         }
         else {
             //do stuff

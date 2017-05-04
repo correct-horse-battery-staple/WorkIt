@@ -16,6 +16,7 @@ public class ActivityItem {
     public ActivityItem(String n, double d){
         name = n;
         difficulty = d;
+        series = new ArrayList<>();
     }
 
     public void addPoint(long datetime){
