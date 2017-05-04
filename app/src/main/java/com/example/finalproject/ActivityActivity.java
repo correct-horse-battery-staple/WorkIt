@@ -70,7 +70,7 @@ public class ActivityActivity extends ServerActivity {
                 for (int i =0;i<jsonArray.length();i++){
                     JSONObject object = (JSONObject)jsonArray.get(i);
                     String name = (String)(object.get("name"));
-                    double difficulty = (Double)object.get("difficulty");
+                    double difficulty = Double.parseDouble((String)object.get("difficulty"));
                     long datetime = Long.parseLong((String)object.get("datetime"));
                     Date d = new Date(datetime);
                     if(!handles.containsKey(name)){
