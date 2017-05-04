@@ -10,13 +10,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.example.finalproject.HeartrateActivity">
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit"/>
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:onClick="edit"/>
+        <EditText
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:hint="Type new activity"
+            android:id="@+id/activity_TYPENEW"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:onClick="add"/>
+    </LinearLayout>
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_LISTVIEW">
     </ListView>
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_GRAPH"/>
 </LinearLayout>
