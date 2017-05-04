@@ -1,20 +1,17 @@
 package com.example.finalproject;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
-
-import com.jjoe64.graphview.series.DataPoint;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by panda_000 on 4/18/2017.
@@ -22,18 +19,19 @@ import java.util.Date;
 public class ActivityActivity extends ServerActivity {
     private boolean editMode = false;
     private ListView listview;
+    private ArrayList<ActivityItem> items;
+    private HashMap<String, Integer> handles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
 
-        listview = (ListView) findViewById(R.id.activity_listview);
+        listview = (ListView) findViewById(R.id.activity_LISTVIEW);
+        items = new ArrayList<>();
+        handles = new HashMap<>();
 
         getData("activities");
-        ArrayList<ActivityItem> items = new ArrayList<>();
-        ActivityActivityArrayAdapter adapter = new ActivityActivityArrayAdapter(this, items);
-        listview.setAdapter(adapter);
     }
 
     public void edit(View v){
@@ -41,7 +39,12 @@ public class ActivityActivity extends ServerActivity {
     }
 
     public void add(View v){
-
+        EditText editText = (EditText)findViewById(R.id.activity_TYPENEW);
+        String name = editText.getText().toString();
+        if(!handles.containsKey(name)){
+            items.add(new ActivityItem(name,5));
+            handles.put(name,items.size()-1);
+        }
     }
 
     public void onClick(View v, ActivityItem item){
@@ -49,7 +52,7 @@ public class ActivityActivity extends ServerActivity {
             putData("activities", "'name':'"+item.getName()+"','difficulty':'" +item.getDiff()+ "'");
         }
         else {
-
+            //do stuff
         }
     }
 
@@ -60,23 +63,25 @@ public class ActivityActivity extends ServerActivity {
         if(op.equals("load")) {
             try {
                 JSONArray jsonArray = new JSONArray(data.substring(op.length()+1));
-                DataPoint[] points = new DataPoint[jsonArray.length()];
+                //DataPoint[] points = new DataPoint[jsonArray.length()];
                 for (int i =0;i<jsonArray.length();i++){
                     JSONObject object = (JSONObject)jsonArray.get(i);
                     String name = (String)(object.get("name"));
-                    String unit = (String)object.get("difficulty");
+                    double difficulty = (Double)object.get("difficulty");
                     long datetime = Long.parseLong((String)object.get("datetime"));
-                    //Log.d("app load",value+" "+unit+" "+datetime);
-                    Date d = new Date();
-                    try {
-                        d = dateFormat.parse("" + datetime);
+                    Date d = new Date(datetime);
+                    if(!handles.containsKey(name)){
+                        items.add(new ActivityItem(name,difficulty));
+                        handles.put(name,items.size()-1);
                     }
-                    catch(ParseException p){
-                        p.printStackTrace();
+                    else{
+                        ActivityItem item = items.get(handles.get(name));
+                        item.addPoint(datetime);
                     }
-                    points[i]=new DataPoint(i+1,(unit.equals("kg")?value*2.20462:value));
+                    //points[i]=new DataPoint(i+1,1);
                 }
-                Log.d("server load",data.substring(op.length()+1));
+                ActivityActivityArrayAdapter adapter = new ActivityActivityArrayAdapter(this, items);
+                listview.setAdapter(adapter);
             }
             catch(JSONException i) {
                 i.printStackTrace();

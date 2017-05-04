@@ -35,12 +35,15 @@ public class ActivityActivityArrayAdapter extends ArrayAdapter<ActivityItem> {
         View rowView = inflater.inflate(R.layout.adapter_activity, parent, false);
         TextView name = (TextView) rowView.findViewById(R.id.activity_adapter_NAME);
         TextView diff = (TextView) rowView.findViewById(R.id.activity_adapter_DIFF);
+        TextView coun = (TextView) rowView.findViewById(R.id.activity_adapter_COUNT);
 
         final int pos = position;
         final String text = getItem(position).getName();
         final double diffi = getItem(position).getDiff();
+        final int count = getItem(position).getSize();
         name.setText(text);
         diff.setText(""+diffi);
+        coun.setText(count);
         rowView.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
                 ((ActivityActivity)context).onClick(view,getItem(pos));

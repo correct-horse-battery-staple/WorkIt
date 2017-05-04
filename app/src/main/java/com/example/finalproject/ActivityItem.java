@@ -19,7 +19,7 @@ public class ActivityItem {
     }
 
     public void addPoint(long datetime){
-        DataPoint point = new DataPoint(series.size(),1);
+        DataPoint point = new DataPoint(getSize(),1);
         series.add(point);
     }
 
@@ -28,5 +28,8 @@ public class ActivityItem {
     }
     public double getDiff(){
         return difficulty;
+    }
+    public int getSize(){
+        return series.size();
     }
 }
