@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/home_BUTTONS"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="30dp">
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:text="Activity"
+            android:id="@+id/home_ACTIVITY"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:onClick="toActivity"/>
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:text="Weight"
+            android:id="@+id/home_WEIGHT"
+            android:layout_toRightOf="@id/home_ACTIVITY"
+            android:layout_alignTop="@+id/home_ACTIVITY"
+            android:onClick="toWeight"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="110dp"
+            android:text="Heartrate"
+            android:id="@+id/home_HEARTRATE"
+            android:layout_below="@id/home_ACTIVITY"
+            android:layout_alignRight="@id/home_ACTIVITY"
+            android:layout_alignLeft="@id/home_ACTIVITY"
+            android:onClick="toHeartrate"/>
+        <Button
+            android:layout_height="110dp"
+            android:layout_width="0dp"
+            android:text="Steps"
+            android:id="@+id/home_STEPS"
+            android:layout_toRightOf="@id/home_HEARTRATE"
+            android:layout_below="@id/home_WEIGHT"
+            android:layout_alignLeft="@id/home_WEIGHT"
+            android:layout_alignRight="@id/home_WEIGHT"
+            android:layout_alignTop="@id/home_HEARTRATE"
+            android:layout_alignBottom="@id/home_HEARTRATE"
+            android:onClick="toSteps"/>
+    </RelativeLayout>
+
+
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/home_GRAPH"
+        android:layout_below="@id/home_BUTTONS"/>
+</RelativeLayout>
