@@ -24,6 +24,7 @@ import java.util.Iterator;
 public class ServerActivity extends AppCompatActivity {
 
     private ServerReceiver receiver;
+    protected SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -141,7 +142,7 @@ public class ServerActivity extends AppCompatActivity {
     }
 
     public void putData(String type, String value){
-        String datetime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String datetime = ""+new Date().getTime();
         SharedPreferences preferences = getSharedPreferences("tokens", Context.MODE_PRIVATE);
         String token = preferences.getString("token",null);
         Intent i = ServerService.ServerIntent(this,"token/"+token+"?store:"+type+"/{"+value+",'datetime':'"+datetime+"'}");

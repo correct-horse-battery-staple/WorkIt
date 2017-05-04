@@ -27,7 +27,8 @@
     </LinearLayout>
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_listview">
     </ListView>
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"

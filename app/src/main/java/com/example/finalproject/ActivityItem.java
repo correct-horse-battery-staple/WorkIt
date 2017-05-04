@@ -26,4 +26,7 @@ public class ActivityItem {
     public String getName(){
         return name;
     }
+    public double getDiff(){
+        return difficulty;
+    }
 }

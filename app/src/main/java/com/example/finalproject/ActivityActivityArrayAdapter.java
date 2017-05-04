@@ -33,31 +33,30 @@ public class ActivityActivityArrayAdapter extends ArrayAdapter<ActivityItem> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View rowView = inflater.inflate(R.layout.adapter_activity, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.activity_adapter_NAME);
+        TextView name = (TextView) rowView.findViewById(R.id.activity_adapter_NAME);
+        TextView diff = (TextView) rowView.findViewById(R.id.activity_adapter_DIFF);
 
+        final int pos = position;
         final String text = getItem(position).getName();
-        textView.setText(text);
-        textView.setOnClickListener(new View.OnClickListener() {
+        final double diffi = getItem(position).getDiff();
+        name.setText(text);
+        diff.setText(""+diffi);
+        rowView.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
-
+                ((ActivityActivity)context).onClick(view,getItem(pos));
             }
         });
         return rowView;
     }
 
-    //1
     @Override
     public int getCount() {
         return items.size();
     }
-
-    //2
     @Override
     public ActivityItem getItem(int position) {
         return items.get(position);
     }
-
-    //3
     @Override
     public long getItemId(int position) {
         return position;

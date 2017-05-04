@@ -38,7 +38,6 @@ public class WeightActivity extends ServerActivity {
     private int graphCount = 8;
     private int pickerValueLB = 140;
     private int pickerValueKG = (int)(pickerValueLB/2.20462);
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
