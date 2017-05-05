@@ -36,6 +36,7 @@ public class ActivityActivity extends ServerActivity {
 
     public void edit(View v){
         editMode=!editMode;
+        refresh();
     }
 
     public void add(View v){
@@ -44,8 +45,7 @@ public class ActivityActivity extends ServerActivity {
         if(!handles.containsKey(name)){
             items.add(new ActivityItem(name,5));
             handles.put(name,items.size()-1);
-            ActivityActivityArrayAdapter adapter = new ActivityActivityArrayAdapter(this, items);
-            listview.setAdapter(adapter);
+            refresh();
         }
     }
 
@@ -54,9 +54,25 @@ public class ActivityActivity extends ServerActivity {
             putData("activities", "'name':'"+item.getName()+"','difficulty':'" +item.getDiff()+ "'");
             getData("activities");
         }
-        else {
-            //do stuff
+    }
+
+    public void delete(View v, ActivityItem item){
+        String name = item.getName();
+        if(handles.containsKey(name)){
+            items.remove(handles.get(name));
+            handles.remove(name);
+            ActivityActivityArrayAdapter adapter = new ActivityActivityArrayAdapter(this, items, editMode);
+            listview.setAdapter(adapter);
         }
+    }
+
+    public void favorite(View v, ActivityItem item){
+
+    }
+
+    public void refresh(){
+        ActivityActivityArrayAdapter adapter = new ActivityActivityArrayAdapter(this, items, editMode);
+        listview.setAdapter(adapter);
     }
 
     @Override
@@ -85,8 +101,7 @@ public class ActivityActivity extends ServerActivity {
                     }
                     //points[i]=new DataPoint(i+1,1);
                 }
-                ActivityActivityArrayAdapter adapter = new ActivityActivityArrayAdapter(this, items);
-                listview.setAdapter(adapter);
+                refresh();
             }
             catch(JSONException i) {
                 i.printStackTrace();

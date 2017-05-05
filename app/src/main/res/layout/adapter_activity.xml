@@ -1,19 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/adapter_activity">
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/activity_adapter_NAME"/>
-    <TextView
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_adapter_NAME"
+            android:textColor="#A9A9A9"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_adapter_DIFF"
+            android:textColor="#A9A9A9"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_adapter_COUNT"
+            android:textColor="#A9A9A9"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/activity_adapter_DIFF"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_adapter_COUNT"/>
+        android:visibility="invisible"
+        android:orientation="horizontal"
+        android:id="@+id/activity_adapter_EDITOR"
+        android:layout_gravity="right">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="delet this"
+            android:enabled = "false"
+            android:id="@+id/activity_adapter_DELETE"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favorite"
+            android:enabled = "false"
+            android:id="@+id/activity_adapter_FAVE"/>
+    </LinearLayout>
 </LinearLayout>

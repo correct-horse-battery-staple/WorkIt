@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,12 +22,14 @@ import java.util.ArrayList;
 public class ActivityActivityArrayAdapter extends ArrayAdapter<ActivityItem> {
     private Context context;
     private ArrayList<ActivityItem> items;
+    private boolean edit;
 
-    public ActivityActivityArrayAdapter(Context ctx, ArrayList<ActivityItem> list) {
+    public ActivityActivityArrayAdapter(Context ctx, ArrayList<ActivityItem> list, boolean edit) {
         super(ctx, R.layout.adapter_activity);
 
         context = ctx;
         items = list;
+        this.edit = edit;
     }
     public View getView (int position, View convertView, ViewGroup parent)
     {
@@ -49,6 +53,26 @@ public class ActivityActivityArrayAdapter extends ArrayAdapter<ActivityItem> {
                 ((ActivityActivity)context).onClick(view,getItem(pos));
             }
         });
+
+        LinearLayout layout = (LinearLayout)rowView.findViewById(R.id.activity_adapter_EDITOR);
+        layout.setVisibility(edit?View.VISIBLE:View.INVISIBLE);
+        Button delet = (Button)rowView.findViewById(R.id.activity_adapter_DELETE);
+        Button fave = (Button)rowView.findViewById(R.id.activity_adapter_FAVE);
+        delet.setEnabled(edit);
+        fave.setEnabled(edit);
+
+        delet.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view){
+                ((ActivityActivity)context).delete(view,getItem(pos));
+            }
+        });
+        fave.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view){
+                ((ActivityActivity)context).favorite(view,getItem(pos));
+            }
+        });
+
+
         return rowView;
     }
 

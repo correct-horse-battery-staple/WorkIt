@@ -12,16 +12,22 @@ public class ActivityItem {
     private String name;
     private double difficulty;
     private ArrayList<DataPoint> series;
+    private boolean favorite;
 
     public ActivityItem(String n, double d){
         name = n;
         difficulty = d;
         series = new ArrayList<>();
+        favorite = false;
     }
 
     public void addPoint(long datetime){
         DataPoint point = new DataPoint(getSize(),1);
         series.add(point);
+    }
+
+    public void toggleFavorite(){
+        favorite=!favorite;
     }
 
     public String getName(){
@@ -32,5 +38,8 @@ public class ActivityItem {
     }
     public int getSize(){
         return series.size();
+    }
+    public boolean isFavorite(){
+        return favorite;
     }
 }
