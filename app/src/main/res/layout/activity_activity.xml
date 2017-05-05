@@ -30,13 +30,20 @@
             android:text="Add"
             android:onClick="add"/>
     </LinearLayout>
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_LISTVIEW">
-    </ListView>
-    <com.jjoe64.graphview.GraphView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_GRAPH"/>
+        android:layout_height="fill_parent"
+        android:weightSum="2"
+        android:orientation="vertical">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/activity_LISTVIEW"
+            android:layout_weight="1"/>
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/activity_GRAPH"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </LinearLayout>

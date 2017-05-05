@@ -27,7 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+            android:windowSoftInputMode="stateVisible"/>
         <activity android:name=".HomeActivity" />
 
         <service
@@ -36,7 +37,8 @@
 
         <activity android:name=".WeightActivity" />
         <activity android:name=".HeartrateActivity"/>
-        <activity android:name=".ActivityActivity"/>
+        <activity android:name=".ActivityActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".StepsActivity"/>
     </application>
 

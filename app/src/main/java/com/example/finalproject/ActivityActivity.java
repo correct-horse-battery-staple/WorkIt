@@ -64,6 +64,8 @@ public class ActivityActivity extends ServerActivity {
         setErrorMessage("token response received");
         String op = data.split(":")[0];
         if(op.equals("load")) {
+            items = new ArrayList<>();
+            handles = new HashMap<>();
             try {
                 JSONArray jsonArray = new JSONArray(data.substring(op.length()+1));
                 //DataPoint[] points = new DataPoint[jsonArray.length()];
