@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -43,8 +44,16 @@ public class ActivityActivity extends ServerActivity {
         EditText editText = (EditText)findViewById(R.id.activity_TYPENEW);
         String name = editText.getText().toString();
         if(!handles.containsKey(name)){
-            items.add(new ActivityItem(name,5));
+            int index = 0;
+            while(index<items.size()&&items.get(index).getDiff()>=0)
+                index++;
+            items.add(index,new ActivityItem(name,0));
             handles.put(name,items.size()-1);
+            while(index<items.size()){
+                String itemName = items.get(index).getName();
+                handles.put(itemName,handles.get(itemName));
+                index++;
+            }
             refresh();
         }
     }
@@ -58,11 +67,11 @@ public class ActivityActivity extends ServerActivity {
 
     public void delete(View v, ActivityItem item){
         String name = item.getName();
+        Log.d("delete","pressed "+name);
         if(handles.containsKey(name)){
-            items.remove(handles.get(name));
+            items.remove(items.get(handles.get(name)));
             handles.remove(name);
-            ActivityActivityArrayAdapter adapter = new ActivityActivityArrayAdapter(this, items, editMode);
-            listview.setAdapter(adapter);
+            refresh();
         }
     }
 
@@ -70,9 +79,14 @@ public class ActivityActivity extends ServerActivity {
 
     }
 
-    public void refresh(){
+    protected void refresh(){
+        Log.d("refresh","done");
         ActivityActivityArrayAdapter adapter = new ActivityActivityArrayAdapter(this, items, editMode);
         listview.setAdapter(adapter);
+    }
+
+    protected void sort(){
+
     }
 
     @Override
@@ -101,6 +115,7 @@ public class ActivityActivity extends ServerActivity {
                     }
                     //points[i]=new DataPoint(i+1,1);
                 }
+                sort();
                 refresh();
             }
             catch(JSONException i) {

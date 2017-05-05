@@ -42,4 +42,7 @@ public class ActivityItem {
     public boolean isFavorite(){
         return favorite;
     }
+    public String toString(){
+        return "["+name+" "+difficulty+" "+series.size()+"]";
+    }
 }
