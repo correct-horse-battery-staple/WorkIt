@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +44,7 @@ public class ActivityActivityArrayAdapter extends ArrayAdapter<ActivityItem> {
 
         final int pos = position;
         final String text = getItem(position).getName();
-        final double diffi = getItem(position).getDiff();
+        final int diffi = getItem(position).getDiff();
         final int count = getItem(position).getSize();
         name.setText(text);
         diff.setText(String.valueOf(diffi));
@@ -56,14 +57,29 @@ public class ActivityActivityArrayAdapter extends ArrayAdapter<ActivityItem> {
 
         LinearLayout layout = (LinearLayout)rowView.findViewById(R.id.activity_adapter_EDITOR);
         layout.setVisibility(edit?View.VISIBLE:View.INVISIBLE);
-        Button delet = (Button)rowView.findViewById(R.id.activity_adapter_DELETE);
+//        Button delet = (Button)rowView.findViewById(R.id.activity_adapter_DELETE);
+        Button set = (Button)rowView.findViewById(R.id.activity_adapter_SETDIFF);
+        final NumberPicker pick = (NumberPicker)rowView.findViewById(R.id.activity_adapter_PICKDIFF);
         Button fave = (Button)rowView.findViewById(R.id.activity_adapter_FAVE);
-        delet.setEnabled(edit);
-        fave.setEnabled(edit);
 
-        delet.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
-                ((ActivityActivity)context).delete(view,getItem(pos));
+//        delet.setEnabled(edit);
+        fave.setEnabled(edit);
+        set.setEnabled(edit);
+        pick.setEnabled(edit);
+
+        pick.setWrapSelectorWheel(false);
+        pick.setMinValue(0);
+        pick.setMaxValue(10);
+        pick.setValue(diffi);
+
+//        delet.setOnClickListener(new View.OnClickListener() {
+//            public void onClick (View view){
+//                ((ActivityActivity)context).delete(view,getItem(pos));
+//            }
+//        });
+        set.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                ((ActivityActivity)context).set(view,pick.getValue());
             }
         });
         fave.setOnClickListener(new View.OnClickListener() {

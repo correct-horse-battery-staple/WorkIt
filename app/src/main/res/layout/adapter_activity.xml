@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/adapter_activity">
+    android:id="@+id/adapter_activity"
+    android:layout_gravity="end">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/activity_adapter_NAME"
-            android:textColor="#A9A9A9"
+            android:textColor="#000000"
             android:textSize="16sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/activity_adapter_DIFF"
-            android:textColor="#A9A9A9"/>
+            android:textColor="#000000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/activity_adapter_COUNT"
-            android:textColor="#A9A9A9"/>
+            android:textColor="#000000"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -31,13 +32,18 @@
         android:visibility="invisible"
         android:orientation="horizontal"
         android:id="@+id/activity_adapter_EDITOR"
-        android:layout_gravity="right">
+        android:layout_alignParentRight="true">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="delet this"
+            android:text="Set difficulty"
             android:enabled = "false"
-            android:id="@+id/activity_adapter_DELETE"/>
+            android:id="@+id/activity_adapter_SETDIFF"/>
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:enabled = "false"
+            android:id="@+id/activity_adapter_PICKDIFF"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,4 +51,4 @@
             android:enabled = "false"
             android:id="@+id/activity_adapter_FAVE"/>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 public class ActivityItem {
     private String name;
-    private double difficulty;
+    private int difficulty;
     private ArrayList<DataPoint> series;
     private boolean favorite;
 
-    public ActivityItem(String n, double d){
+    public ActivityItem(String n, int d){
         name = n;
         difficulty = d;
         series = new ArrayList<>();
@@ -33,7 +33,7 @@ public class ActivityItem {
     public String getName(){
         return name;
     }
-    public double getDiff(){
+    public int getDiff(){
         return difficulty;
     }
     public int getSize(){

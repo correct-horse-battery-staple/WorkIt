@@ -47,6 +47,7 @@ public class WeightActivity extends ServerActivity {
         LBorKG=true;
 
         picker = (NumberPicker)findViewById(R.id.weight_PICKER);
+        picker.setWrapSelectorWheel(false);
         picker.setMinValue(0);
         picker.setMaxValue(700);
         picker.setValue(LBorKG?pickerValueLB:pickerValueKG);
@@ -66,7 +67,7 @@ public class WeightActivity extends ServerActivity {
 
         GridLabelRenderer g = graph.getGridLabelRenderer();
         //g.setLabelFormatter(new DateAsXAxisLabelFormatter(this,dateFormat));
-        g.setNumHorizontalLabels(2);
+        g.setNumHorizontalLabels(5);
         g.setNumVerticalLabels(7);
         graph.getGridLabelRenderer().setHumanRounding(false);
 
@@ -99,6 +100,7 @@ public class WeightActivity extends ServerActivity {
     public void submit(View v){
         int weight = picker.getValue();
         putData("weight","'value':"+weight+",'unit':'"+(LBorKG?"lb":"kg")+"'");
+        getData("weight");
     }
 
     public void getData(View v){
@@ -113,8 +115,8 @@ public class WeightActivity extends ServerActivity {
             try {
                 JSONArray jsonArray = new JSONArray(data.substring(op.length()+1));
                 DataPoint[] points = new DataPoint[jsonArray.length()];
-                Date minX = new Date();
-                Date maxX = new Date();
+                int minY = (Integer)((JSONObject)jsonArray.get(0)).get("value");
+                int maxY = (Integer)((JSONObject)jsonArray.get(0)).get("value");
                 for (int i =0;i<jsonArray.length();i++){
                     JSONObject object = (JSONObject)jsonArray.get(i);
                     int value = (Integer)(object.get("value"));
@@ -129,12 +131,15 @@ public class WeightActivity extends ServerActivity {
                         p.printStackTrace();
                     }
                     points[i]=new DataPoint(i+1,(unit.equals("kg")?value*2.20462:value));
-                    if(i==jsonArray.length()-graphCount-1)
-                        minX = d;
-                    if(i==jsonArray.length()-1)
-                        maxX = d;
-                    //Log.d("app load",points[i].toString());
+                    if(value<minY)
+                        minY=value;
+                    if(value>maxY)
+                        maxY=value;
                 }
+                Viewport v = graph.getViewport();
+                v.setMaxX(points.length+1);
+                v.setMinY(minY>10?minY-10:0);
+                v.setMaxY(maxY+10);
                 dataSeries.resetData(points);
 //                graph.getViewport().setMinX(minX);
 //                graph.getViewport().setMaxX(maxX);
